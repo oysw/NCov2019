@@ -19,7 +19,6 @@ public class CountAdapter extends BaseAdapter {
     class ViewHolder{
         TextView provinceName;
         TextView confirmedCount;
-        TextView suspectedCount;
         TextView curedCount;
         TextView deadCount;
     }
@@ -59,7 +58,6 @@ public class CountAdapter extends BaseAdapter {
             convertView = inflater.inflate(layout, parent, false);
             holder.provinceName = convertView.findViewById(R.id.province_name);
             holder.confirmedCount = convertView.findViewById(R.id.confirmed_count);
-            holder.suspectedCount = convertView.findViewById(R.id.suspected_count);
             holder.curedCount = convertView.findViewById(R.id.cured_count);
             holder.deadCount = convertView.findViewById(R.id.dead_count);
             convertView.setTag(holder);
@@ -71,7 +69,6 @@ public class CountAdapter extends BaseAdapter {
             JSONObject area = areaList.getJSONObject(position);
             holder.provinceName.setText(area.getString("provinceEnglishName"));
             holder.confirmedCount.setText(area.getString("confirmedCount"));
-            holder.suspectedCount.setText(area.getString("suspectedCount"));
             holder.curedCount.setText(area.getString("curedCount"));
             holder.deadCount.setText(area.getString("deadCount"));
         } catch (JSONException e) {
