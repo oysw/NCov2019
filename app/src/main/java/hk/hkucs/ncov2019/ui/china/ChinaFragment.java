@@ -1,19 +1,15 @@
 package hk.hkucs.ncov2019.ui.china;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.ValueCallback;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.widget.BaseAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -55,6 +51,8 @@ public class ChinaFragment extends Fragment {
                 WebView.setWebContentsDebuggingEnabled(true);
                 settings.setDomStorageEnabled(true);
                 settings.setSupportZoom(true);
+                settings.setBuiltInZoomControls(true);
+                settings.setLoadWithOverviewMode(true);
                 settings.setUseWideViewPort(true);
                 settings.setDefaultTextEncodingName("UTF-8");
                 settings.setAllowFileAccess(true);

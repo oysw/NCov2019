@@ -51,6 +51,8 @@ public class GlobalFragment extends Fragment {
                 WebView.setWebContentsDebuggingEnabled(true);
                 settings.setDomStorageEnabled(true);
                 settings.setSupportZoom(true);
+                settings.setBuiltInZoomControls(true);
+                settings.setLoadWithOverviewMode(true);
                 settings.setUseWideViewPort(true);
                 settings.setDefaultTextEncodingName("UTF-8");
                 settings.setAllowFileAccess(true);
