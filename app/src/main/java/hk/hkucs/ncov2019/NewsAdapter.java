@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +24,7 @@ import com.squareup.picasso.Picasso;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     public Context context;
@@ -59,8 +62,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         final Article article = articleList.get(position);
         String pubDate;
         String srcPubDate = article.getPubDate();
-        SimpleDateFormat srcFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z");
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat srcFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.ENGLISH);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         try {
             pubDate = format.format(srcFormat.parse(srcPubDate));
         } catch (ParseException e) {
@@ -70,7 +73,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         holder.pubDate.setText(pubDate);
         holder.title.setText(article.getTitle());
         Picasso.get().load(article.getImage()).placeholder(R.drawable.ic_broken_pic_holder).into(holder.image);
-        String spanStr = "View in Browser";
+        String spanStr = "See More";
         SpannableString str = new SpannableString(spanStr);
         str.setSpan(new ClickableSpan() {
             @Override
@@ -80,6 +83,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
                 context.startActivity(intent);
             }
         }, 0, spanStr.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        str.setSpan(
+                new ForegroundColorSpan(0xFF0000FF),
+                0,spanStr.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         holder.link.setText(str);
         holder.link.setMovementMethod(LinkMovementMethod.getInstance());
     }
